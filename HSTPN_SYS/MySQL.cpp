@@ -113,9 +113,6 @@ bool CMySQL::ModifyData()
 //É¾³ýÊý¾Ý  
 bool CMySQL::DeleteData()
 {
-	//test
-	int tmpData = 10;
-
 	strcpy(query, "delete from mytalbe where name='zhao'"); 
 	if (mysql_query(&mysql, query))        //Ö´ÐÐSQLÓï¾ä  
 	{
