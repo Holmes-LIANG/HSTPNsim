@@ -1,0 +1,419 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="UserImages.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\HSTPN_SYS.rc2">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\HSTPN_SYSDoc.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\HSTPN_SYS.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Toolbar.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Toolbar256.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\discretePlace.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\discretePlace_1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_discrete1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_cntnus.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_rand.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\bitmap1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_time.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\bitmap2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_tctrl.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_lctrl.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_transition.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_cntnus_drag.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_discrete1_drag.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_rand_drag.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_time_drag.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_lctrl_drag.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_tctrl_drag.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_transition_drag.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_linearrow.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_time1_1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\fundamental_element_1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\physical_model_1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\typical_structure_1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\fundamental_element_2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\physical_model_2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\typical_structure_2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_ctrl.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_transition1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_ctrl_1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\md_transition1_1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\toolbar1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\fundamet_elemt2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\physcl_md2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\typcal_strctre2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\icon1.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\icon2.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\icon3.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\icon4.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\icon5.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\icon6.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\icon7.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\icon8.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\icon9.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\icon10.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\icon11.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\icon12.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\ico00001.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\icon13.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\bmp00001.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\icon14.ico">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HSTPN_SYS.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HSTPN_SYSDoc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HSTPN_SYSView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewModelChoose.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgModelChoose1.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HSTPN_Message.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Arrow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelPropSetDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TabPropSet1.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TabPropSet2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SimToolBar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Place.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Transition.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tinystr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSaveNote.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgModelChoose.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HSTPN_SYSSim.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgModelCheck.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WndAnalyLog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WndShowMatrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CTRLShowMatrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSMat_OutValue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgChooseOValue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CSVStream.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgChseOVlueTFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSaveCurrentState.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgResetState.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrowEdit.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgMove.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MySQL.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Init.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="HSTPN_SYS.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="HSTPN_SYSDoc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="HSTPN_SYSView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewModelChoose.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgModelChoose1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Arrow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelPropSetDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TabPropSet1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TabPropSet2.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SimToolBar.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Place.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Transition.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tinystr.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxmlerror.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxmlparser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSaveNote.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgModelChoose.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="HSTPN_SYSSim.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgModelCheck.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WndAnalyLog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WndShowMatrix.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CTRLShowMatrix.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSMat_OutValue.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgChooseOValue.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CSVStream.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgChseOVlueTFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgModelParmList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSaveCurrentState.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgResetState.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ArrowEdit.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgMove.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MySQL.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Init.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="HSTPN_SYS.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

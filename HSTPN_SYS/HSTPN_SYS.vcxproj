@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DFD88B4A-BA1C-4D54-9E89-26DCC42A98F2}</ProjectGuid>
+    <RootNamespace>HSTPN_SYS</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);E:\DirectX\Lib\x86;E:\mysql-5.7.32-win32\include</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;E:\DirectX\Lib\x86;E:\mysql-5.7.32-win32\lib;E:\mysql-8.0.19-winx64\lib</LibraryPath>
+    <ReferencePath>E:\mysql-5.7.32-win32\lib;E:\mysql-8.0.19-winx64\lib;$(ReferencePath)</ReferencePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\DirectX\Include2</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>XINPUT9_1_0.LIB;libmysql.lib</AdditionalDependencies>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="res\bitmap1.bmp" />
+    <None Include="res\bitmap2.bmp" />
+    <None Include="res\bmp00001.bmp" />
+    <None Include="res\discretePlace.bmp" />
+    <None Include="res\discretePlace_1.bmp" />
+    <None Include="res\fundamental_element_1.bmp" />
+    <None Include="res\fundamental_element_2.bmp" />
+    <None Include="res\fundamet_elemt2.bmp" />
+    <None Include="res\HSTPN_SYS.ico" />
+    <None Include="res\HSTPN_SYS.rc2" />
+    <None Include="res\HSTPN_SYSDoc.ico" />
+    <None Include="res\ico00001.ico" />
+    <None Include="res\icon1.ico" />
+    <None Include="res\icon10.ico" />
+    <None Include="res\icon11.ico" />
+    <None Include="res\icon12.ico" />
+    <None Include="res\icon13.ico" />
+    <None Include="res\icon14.ico" />
+    <None Include="res\icon2.ico" />
+    <None Include="res\icon3.ico" />
+    <None Include="res\icon4.ico" />
+    <None Include="res\icon5.ico" />
+    <None Include="res\icon6.ico" />
+    <None Include="res\icon7.ico" />
+    <None Include="res\icon8.ico" />
+    <None Include="res\icon9.ico" />
+    <None Include="res\md_cntnus.bmp" />
+    <None Include="res\md_cntnus_drag.bmp" />
+    <None Include="res\md_ctrl.bmp" />
+    <None Include="res\md_ctrl_1.bmp" />
+    <None Include="res\md_discrete1.bmp" />
+    <None Include="res\md_discrete1_drag.bmp" />
+    <None Include="res\md_lctrl.bmp" />
+    <None Include="res\md_lctrl_drag.bmp" />
+    <None Include="res\md_linearrow.bmp" />
+    <None Include="res\md_rand.bmp" />
+    <None Include="res\md_rand_drag.bmp" />
+    <None Include="res\md_tctrl.bmp" />
+    <None Include="res\md_tctrl_drag.bmp" />
+    <None Include="res\md_time.bmp" />
+    <None Include="res\md_time1_1.bmp" />
+    <None Include="res\md_time_drag.bmp" />
+    <None Include="res\md_transition.bmp" />
+    <None Include="res\md_transition1.bmp" />
+    <None Include="res\md_transition1_1.bmp" />
+    <None Include="res\md_transition_drag.bmp" />
+    <None Include="res\physcl_md2.bmp" />
+    <None Include="res\physical_model_1.bmp" />
+    <None Include="res\physical_model_2.bmp" />
+    <None Include="res\Toolbar.bmp" />
+    <None Include="res\toolbar1.bmp" />
+    <None Include="res\Toolbar256.bmp" />
+    <None Include="res\typcal_strctre2.bmp" />
+    <None Include="res\typical_structure_1.bmp" />
+    <None Include="res\typical_structure_2.bmp" />
+    <None Include="UserImages.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Arrow.h" />
+    <ClInclude Include="ArrowEdit.h" />
+    <ClInclude Include="CSVStream.h" />
+    <ClInclude Include="CTRLShowMatrix.h" />
+    <ClInclude Include="DlgChooseOValue.h" />
+    <ClInclude Include="DlgChseOVlueTFile.h" />
+    <ClInclude Include="DlgModelCheck.h" />
+    <ClInclude Include="DlgModelChoose.h" />
+    <ClInclude Include="DlgModelChoose1.h" />
+    <ClInclude Include="DlgMove.h" />
+    <ClInclude Include="DlgResetState.h" />
+    <ClInclude Include="DlgSaveCurrentState.h" />
+    <ClInclude Include="DlgSaveNote.h" />
+    <ClInclude Include="DlgSMat_OutValue.h" />
+    <ClInclude Include="HSTPN_Message.h" />
+    <ClInclude Include="HSTPN_SYS.h" />
+    <ClInclude Include="HSTPN_SYSDoc.h" />
+    <ClInclude Include="HSTPN_SYSSim.h" />
+    <ClInclude Include="HSTPN_SYSView.h" />
+    <ClInclude Include="Init.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MySQL.h" />
+    <ClInclude Include="Place.h" />
+    <ClInclude Include="ModelPropSetDlg.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="tinystr.h" />
+    <ClInclude Include="tinyxml.h" />
+    <ClInclude Include="Transition.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="SimToolBar.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TabPropSet1.h" />
+    <ClInclude Include="TabPropSet2.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="ViewModelChoose.h" />
+    <ClInclude Include="WndAnalyLog.h" />
+    <ClInclude Include="WndShowMatrix.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Arrow.cpp" />
+    <ClCompile Include="ArrowEdit.cpp" />
+    <ClCompile Include="CSVStream.cpp" />
+    <ClCompile Include="CTRLShowMatrix.cpp" />
+    <ClCompile Include="DlgChooseOValue.cpp" />
+    <ClCompile Include="DlgChseOVlueTFile.cpp" />
+    <ClCompile Include="DlgModelCheck.cpp" />
+    <ClCompile Include="DlgModelChoose.cpp" />
+    <ClCompile Include="DlgModelChoose1.cpp" />
+    <ClCompile Include="DlgModelParmList.cpp" />
+    <ClCompile Include="DlgMove.cpp" />
+    <ClCompile Include="DlgResetState.cpp" />
+    <ClCompile Include="DlgSaveCurrentState.cpp" />
+    <ClCompile Include="DlgSaveNote.cpp" />
+    <ClCompile Include="DlgSMat_OutValue.cpp" />
+    <ClCompile Include="HSTPN_SYS.cpp" />
+    <ClCompile Include="HSTPN_SYSDoc.cpp" />
+    <ClCompile Include="HSTPN_SYSSim.cpp" />
+    <ClCompile Include="HSTPN_SYSView.cpp" />
+    <ClCompile Include="Init.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MySQL.cpp" />
+    <ClCompile Include="Place.cpp" />
+    <ClCompile Include="ModelPropSetDlg.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="tinystr.cpp" />
+    <ClCompile Include="tinyxml.cpp" />
+    <ClCompile Include="tinyxmlerror.cpp" />
+    <ClCompile Include="tinyxmlparser.cpp" />
+    <ClCompile Include="Transition.cpp" />
+    <ClCompile Include="SimToolBar.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TabPropSet1.cpp" />
+    <ClCompile Include="TabPropSet2.cpp" />
+    <ClCompile Include="ViewModelChoose.cpp" />
+    <ClCompile Include="WndAnalyLog.cpp" />
+    <ClCompile Include="WndShowMatrix.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="HSTPN_SYS.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="HSTPN_SYS.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
