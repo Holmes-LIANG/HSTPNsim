@@ -277,10 +277,12 @@ UINT CDlgMove::CreatMove(LPVOID pParam)
 	//pDlg->Create(IDD_DLG_MOVE);
 	//HWND hw = pDlg->GetSafeHwnd();
 	//pDlg->ShowWindow(SW_SHOWNORMAL);
+
 	//initialize the game
 	CDlgMove  *pDlg = (CDlgMove  *)pParam;
 	HWND hw = pDlg->GetSafeHwnd();
 	if (!pDlg->Game_Init(hw)) return 0;
+
 	//process game loop 
 	while (!pDlg->gameover) {
 		pDlg->Game_Run(hw);

@@ -64,12 +64,26 @@ void CInit::OnBnClickedMoveButton()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	CDialogEx::OnCancel(); 
+
+	//CDlgMove* pDlg = &(CDlgMove::getInstance());
+	//pDlg->Create(IDD_DLG_MOVE);
+
+	//pDlg->MoveWindow(CRect(100, 10, 1124, 778), TRUE);//设置对话框大小1024*768
+	//HWND hw = pDlg->GetSafeHwnd();
+	//pDlg->ShowWindow(SW_SHOWNORMAL);
+
+	CRect mainFramRect;
+	//获取主窗口的矩形区域
+	(AfxGetApp()->m_pMainWnd)->GetWindowRect(mainFramRect);
+	//创建对话框
 	CDlgMove* pDlg = &(CDlgMove::getInstance());
 	pDlg->Create(IDD_DLG_MOVE);
-
-	pDlg->MoveWindow(CRect(100, 10, 1124, 778), TRUE);//设置对话框大小1024*768
-	HWND hw = pDlg->GetSafeHwnd();
-	pDlg->ShowWindow(SW_SHOWNORMAL);
+	//设置对话框的位置
+	pDlg->SetWindowPos(&CWnd::wndTop, mainFramRect.left + mainFramRect.Width() / 2 - 1024 / 2, mainFramRect.top + mainFramRect.Height() / 2 - 768 / 2, 1024, 768, NULL);
+	//显示对话框
+	pDlg->ShowWindow(SW_SHOW);
+	//更新对话框
+	pDlg->UpdateWindow();
 
 	//获取输入的初始值
 	UpdateData(TRUE);

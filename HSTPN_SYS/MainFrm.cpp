@@ -544,35 +544,30 @@ void CMainFrame::OnShowpramlist()
 void CMainFrame::OnSimMove()
 {
 	// TODO: 在此添加命令处理程序代码
-	//CHSTPN_SYSDoc* pDoc = GetDocument();
-	//ASSERT_VALID(pDoc);
-	//if (!pDoc)
-	//	return;
-	//CDlgMove dlgMove;
-	//dlgMove.m_hWnd;
 
-    CScene  *pDlg = &(CScene::getInstance());
-    pDlg->Create(IDD_DLG_SCENE);
-	//pDlg->MoveWindow(CRect(100, 10, 724, 478), TRUE);//设置对话框大小1024*768
-	pDlg->MoveWindow(CRect(500, 110, 1124, 478), TRUE);//设置对话框大小1024*768
-	HWND hw = pDlg->GetSafeHwnd();
-	pDlg->ShowWindow(SW_SHOWNORMAL);
 
-/*	
-	if (CHSTPN_SYSSim::getMoveData().size() > 0) {
-		CDlgMove  *pDlg = new CDlgMove;
-		pDlg->Create(IDD_DLG_MOVE);
-		
-		pDlg->MoveWindow(CRect(100, 10, 1124, 778), TRUE);//设置对话框大小1024*768
-		HWND hw = pDlg->GetSafeHwnd();
-		pDlg->ShowWindow(SW_SHOWNORMAL);
+ //   CScene  *pDlg = &(CScene::getInstance());
+ //   pDlg->Create(IDD_DLG_SCENE);
+	//pDlg->MoveWindow(CRect(500, 110, 1124, 478), TRUE);//设置对话框大小1024*768
+	//HWND hw = pDlg->GetSafeHwnd();
+	//pDlg->ShowWindow(SW_SHOWNORMAL);
+	CScene  *pDlg=new CScene();
+	pDlg->CreatSceneDlg();
+	
+	//if (CHSTPN_SYSSim::getMoveData().size() > 0) {
+	//	CDlgMove  *pDlg = new CDlgMove;
+	//	pDlg->Create(IDD_DLG_MOVE);
+	//	
+	//	pDlg->MoveWindow(CRect(100, 10, 1124, 778), TRUE);//设置对话框大小1024*768
+	//	HWND hw = pDlg->GetSafeHwnd();
+	//	pDlg->ShowWindow(SW_SHOWNORMAL);
 
-		m_moveThread = AfxBeginThread(pDlg->CreatMove, (LPVOID)pDlg);// 开辟新线程，进行程序仿真。参数1 线程的入口函数,声明一定要如下: UINT MyThreadFunction( LPVOID pParam ); 参数2 传递入线程的参数, 注意它的类型为:LPVOID, 所以我们可以传递一个结构体入线程。
-																	 //m_moveThread = AfxBeginThread(OnTest, (LPVOID)this);
-	}
-	else
-		MessageBoxW(L"模型未运行或模型中不存在全局变量，请进行模型检测");
-*/
+	//	m_moveThread = AfxBeginThread(pDlg->CreatMove, (LPVOID)pDlg);// 开辟新线程，进行程序仿真。参数1 线程的入口函数,声明一定要如下: UINT MyThreadFunction( LPVOID pParam ); 参数2 传递入线程的参数, 注意它的类型为:LPVOID, 所以我们可以传递一个结构体入线程。
+	//																 //m_moveThread = AfxBeginThread(OnTest, (LPVOID)this);
+	//}
+	//else
+	//	MessageBoxW(L"模型未运行或模型中不存在全局变量，请进行模型检测");
+
 	//数据库测试函数
 	//mySQL.ConnectMySQL();
 	//mySQL.QueryDatabase1();

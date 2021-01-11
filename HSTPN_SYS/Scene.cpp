@@ -12,11 +12,7 @@
 
 IMPLEMENT_DYNAMIC(CScene, CDialogEx)
 
-CScene::CScene(CWnd* pParent /*=NULL*/)
-	: CDialogEx(IDD_DLG_SCENE, pParent)
-{
 
-}
 
 CScene::~CScene()
 {
@@ -44,6 +40,7 @@ END_MESSAGE_MAP()
 void CScene::OnBnClickedButtonOne()
 {
 	// TODO: 在此添加控件通知处理程序代码
+
 	::SendMessage(AfxGetMainWnd()->m_hWnd, WM_COMMAND, WM_MESSAGE_SCENE, NULL);//打开HST文件
 	CDialogEx::OnOK();
 	INT_PTR nRes;             // 用于保存DoModal函数的返回值
@@ -52,13 +49,21 @@ void CScene::OnBnClickedButtonOne()
 	if (IDCANCEL == nRes)     // 判断对话框退出后返回值是否为IDCANCEL，如果是则return，否则继续向下执行   
 		return;
 
-	CInit* pDlg = new CInit();
-	pDlg->Create(IDD_DLG_INIT);
-
-	pDlg->MoveWindow(CRect(100, 10, 1124, 778), TRUE);//设置对话框大小1024*768
-	HWND hw = pDlg->GetSafeHwnd();
-	pDlg->ShowWindow(SW_SHOWNORMAL);
 	
+	CRect mainFramRect, initRect;
+	//获取主窗口的矩形区域
+	(AfxGetApp()->m_pMainWnd)->GetWindowRect(mainFramRect);
+	//创建对话框
+	CInit* pDlg = new CInit();
+	pSceneDlg->Create(IDD_DLG_INIT);
+	//获取场景选择窗口的矩形区域
+	pSceneDlg->GetWindowRect(initRect);
+	//设置对话框的位置
+	pSceneDlg->SetWindowPos(&CWnd::wndTop, mainFramRect.left + mainFramRect.Width() / 2 - initRect.Width() / 2, mainFramRect.top + mainFramRect.Height() / 2 - initRect.Height() / 2, 0, 0, SWP_NOSIZE);
+	//显示对话框
+	pSceneDlg->ShowWindow(SW_SHOW);
+	//更新对话框
+	pSceneDlg->UpdateWindow();
 }
 
 
@@ -85,3 +90,26 @@ void CScene::OnBnClickedButtonFour()
 	MessageBoxW(L"陆军机动作战！！！");
 }
 
+//创建场景选择对话框
+void CScene::CreatSceneDlg() {
+	//// TODO: Add your control notification handler code here
+	CRect mainFramRect,sceneRect;
+	//新建对话框实例
+	if (pSceneDlg == nullptr) {
+		pSceneDlg = new CScene();
+	}
+	//获取主窗口的矩形区域
+	(AfxGetApp()->m_pMainWnd)->GetWindowRect(mainFramRect);
+
+	//创建对话框
+	pSceneDlg->Create(IDD_DLG_SCENE);
+	//获取场景选择窗口的矩形区域
+	pSceneDlg->GetWindowRect(sceneRect);
+	//设置对话框的位置
+	pSceneDlg->SetWindowPos(&CWnd::wndTop, mainFramRect.left+ mainFramRect.Width()/2-sceneRect.Width()/2, mainFramRect.top + mainFramRect.Height()/2-sceneRect.Height()/2, 0, 0, SWP_NOSIZE);
+	//显示对话框
+	pSceneDlg->ShowWindow(SW_SHOW);
+	//更新对话框
+	pSceneDlg->UpdateWindow();
+
+}
