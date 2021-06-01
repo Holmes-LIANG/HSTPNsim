@@ -1,3 +1,15 @@
+/************************************************************************
+*
+*    Copyright         Copyright 2021 NEU Hao Lina.
+*    File Name:        DlgMove.h/DlgMove.cpp
+*    Description:      实现可视化推演的动画演示
+*
+*    Version:        V2.0.7
+*    Author:         zhao
+*    Create Time:    2020-05-04
+*
+*************************************************************************/
+
 #pragma once
 
 #include "HSTPN_SYSDoc.h"
@@ -45,24 +57,24 @@ const int RADAR = 12;
 const int SHIP = 1;
 float toRadians(double degrees);
 
-
-
 //macro to detect key presses
 #define KEY_DOWN(vk_code) ((GetAsyncKeyState(vk_code) & 0x8000) ? 1 : 0)
+
+//动画演示类
 class CDlgMove : public CDialogEx
 {
 	DECLARE_DYNAMIC(CDlgMove)
-	//单例模式
-private:
-	CDlgMove(CWnd* pParent = nullptr);   // 标准构造函数
 	
+public:
+	CDlgMove(CWnd* pParent = nullptr);   // 标准构造函数	
 	CDlgMove(const CDlgMove&);
 	CDlgMove& operator=(const CDlgMove&);
-public:
-	static CDlgMove& getInstance() {
-		static CDlgMove instance;
-		return instance;
-	}
+
+	//单例模式 未使用
+	//static CDlgMove& getInstance() {
+	//	static CDlgMove instance;
+	//	return instance;
+	//}
 public:
 	virtual ~CDlgMove();
 	// 对话框数据
@@ -185,7 +197,7 @@ public:
 	int hpower = 5;//轰炸机导弹威力
 	int gpoewr = 5;//攻击机导弹威力
 
-				   //攻击各个方向的战机
+	 //攻击各个方向的战机
 	int planeDzhBjx = 6;
 	int planeDzhDlbl = 6;
 	int planeDzhYc = 0;
@@ -206,9 +218,9 @@ public:
 	int healthRadarDlbl = 100;
 	int healthRadarYc = 100;
 	//战机数量
-	int planeHzj = 32;
-	int planeGjj = 18;
-	int planeDzj = 18;
+	int planeHzj = 36;
+	int planeGjj = 20;
+	int planeDzj = 12;
 	//基地生命值
 	int healthBjx = 100;
 	int healthDlbl = 100;
@@ -254,7 +266,7 @@ public:
 	int Collision(SPRITE sprite1, SPRITE sprite2);
 
 	void Draw_HUD();
-
+	//加载绘制资源
 	bool Create_Dplanes();
 	void Draw_Dplanes();
 	bool Create_Hplanes();
@@ -283,16 +295,18 @@ public:
 	void Game_Run(HWND window);
 	void Game_End();
 
-	static UINT CreatMove(LPVOID pParam);	//创建动画循环函数
+	//创建动画循环函数
+	static UINT CreatMove(LPVOID pParam);	
 	//void PostNcDestroy();//释放内存
 
-						 //font functions
+    //font functions
 	LPD3DXFONT MakeFont(WCHAR* name, int size);
 	void FontPrint(LPD3DXFONT font, int x, int y, LPCWSTR text, D3DCOLOR color = D3DCOLOR_XRGB(255, 255, 255));
 	void ValuesInit();
-	void ValuesUpdate();//从HSTPN中获取更新所需的变量值
+	//从HSTPN中获取更新所需的变量值
+	void ValuesUpdate();
 
-						// 对话框数据
+// 对话框数据
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_DIALOG1 };
 #endif
@@ -304,9 +318,6 @@ protected:
 public:
 	afx_msg void OnClose();
 	afx_msg void OnSize(UINT nType, int cx, int cy);
-	afx_msg void OnBnClickedButton2();
-	afx_msg void OnBnClickedOk();
-	afx_msg void OnBnClickedButton1();
 };
 
 //extern CDlgMove  *pDlg = new CDlgMove;

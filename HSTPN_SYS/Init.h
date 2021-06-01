@@ -1,8 +1,8 @@
 #pragma once
 
 
+class CHSTPN_SYSDoc;
 // CInit 对话框
-
 class CInit : public CDialogEx
 {
 	DECLARE_DYNAMIC(CInit)
@@ -22,6 +22,9 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedMoveButton();
+	void InitDataToPDoc();
+
+	CHSTPN_SYSDoc* p_Doc;
 	CWinThread * m_moveThread;//动画线程
 	int m_editDZZ;
 	int m_editGJJ;

@@ -35,8 +35,7 @@ END_MESSAGE_MAP()
 
 // CScene 消息处理程序
 
-
-//地空攻防对抗作战
+//"黄金峡谷"行动
 void CScene::OnBnClickedButtonOne()
 {
 	// TODO: 在此添加控件通知处理程序代码
@@ -48,7 +47,6 @@ void CScene::OnBnClickedButtonOne()
 	nRes = DlgInit.DoModal();
 	if (IDCANCEL == nRes)     // 判断对话框退出后返回值是否为IDCANCEL，如果是则return，否则继续向下执行   
 		return;
-
 	
 	CRect mainFramRect, initRect;
 	//获取主窗口的矩形区域
@@ -66,28 +64,23 @@ void CScene::OnBnClickedButtonOne()
 	pSceneDlg->UpdateWindow();
 }
 
-
 void CScene::OnBnClickedButtonTwo()
 {
 	// TODO: 在此添加控件通知处理程序代码
-	MessageBoxW(L"无人化作战！！！");
+	MessageBoxW(L"无人化作战，正在搭建中......");
 	
 }
-
 
 void CScene::OnBnClickedButtonThree()
 {
 	// TODO: 在此添加控件通知处理程序代码
-	MessageBoxW(L"导弹攻防对抗作战！！！");
-
-	
+	MessageBoxW(L"导弹攻防对抗作战，正在搭建中......");	
 }
-
 
 void CScene::OnBnClickedButtonFour()
 {
 	// TODO: 在此添加控件通知处理程序代码
-	MessageBoxW(L"陆军机动作战！！！");
+	MessageBoxW(L"陆军机动作战，正在搭建中......");
 }
 
 //创建场景选择对话框
@@ -111,5 +104,4 @@ void CScene::CreatSceneDlg() {
 	pSceneDlg->ShowWindow(SW_SHOW);
 	//更新对话框
 	pSceneDlg->UpdateWindow();
-
 }

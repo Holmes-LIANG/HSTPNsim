@@ -46,9 +46,8 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWndEx)
 //	ON_WM_PAINT()
 	ON_COMMAND(ID_SHOWPRAMLIST, &CMainFrame::OnShowpramlist)
 	ON_COMMAND(ID_SIM_MOVE, &CMainFrame::OnSimMove)
-
-
-	END_MESSAGE_MAP()
+	ON_COMMAND(ID_COMBAT, &CMainFrame::OnCombat)
+END_MESSAGE_MAP()
 
 static UINT indicators[] =
 {
@@ -575,5 +574,31 @@ void CMainFrame::OnSimMove()
 	//mySQL.DeleteData();
 	//mySQL.ModifyData();
 
+
+}
+
+
+void CMainFrame::OnCombat()
+{
+	// TODO: 在此添加命令处理程序代码
+	CRect mainFramRect;
+	//获取主窗口的矩形区域
+	(AfxGetApp()->m_pMainWnd)->GetWindowRect(mainFramRect);
+	//创建对话框
+	CDlgMove* pDlg = new CDlgMove;
+	pDlg->Create(IDD_DLG_MOVE);
+	//设置对话框的位置
+	pDlg->SetWindowPos(&CWnd::wndTop, mainFramRect.left + mainFramRect.Width() / 2 - 1024 / 2, mainFramRect.top + mainFramRect.Height() / 2 - 768 / 2, 1024, 768, NULL);
+	//显示对话框
+	pDlg->ShowWindow(SW_SHOW);
+	//更新对话框
+	pDlg->UpdateWindow();
+
+	//获取输入的初始值
+	UpdateData(TRUE);
+	
+	::SendMessage(AfxGetMainWnd()->m_hWnd, WM_COMMAND, ID_DEBUG_START, NULL);
+
+	m_moveThread = AfxBeginThread(pDlg->CreatMove, (LPVOID)pDlg);// 开辟新线程，进行程序仿真。参数1 线程的入口函数,声明一定要如下: UINT MyThreadFunction( LPVOID pParam ); 参数2 传递入线程的参数, 注意它的类型为:LPVOID, 所以我们可以传递一个结构体入线程。
 
 }

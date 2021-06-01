@@ -354,14 +354,14 @@ UINT CHSTPN_SYSSim::HSTPN_SimEngine(LPVOID psimnet)
 	vector<CTransition*>  TFired;                                                                            // 定义使能变迁集合 TFired
 	double                SimClock     = 0;                                                                  // 定义时间中  
 	
-	PassByValue(m_pdoc);
 
+	PassByValue(m_pdoc);
     //==3.开始推演算法
 	do{
 		InitPlaceLocalData(vector_place, m_pdoc);//+++++12.18
 
 _CHECK_SIMTIME_:
-
+		//PassByValue(m_pdoc);
 		if(WaitForSingleObject(m_stopsimevent->m_hObject,(DWORD)0.001)!=WAIT_OBJECT_0)                       // 通过停止按钮，控制线程是否退出
 		{
 			m_pmainframe->SendMessage(WM_MESSAGE_CHANGEPROGRESS,SimClock*10000,0);// 将当前仿真进度设置到进度条
@@ -1042,9 +1042,8 @@ void CHSTPN_SYSSim::PassByValue(CHSTPN_SYSDoc * m_pdoc) {
 	unordered_map<string, int> mapMoveDataTmp;
 	IOValue tmp;
 	//去除重复变量
-	//if(m_pdoc->arryIOputDataG[0]->Value)
-	//	for (vector<IOValue*>::iterator itero = m_pdoc->arryIOputDataG.begin(); itero != m_pdoc->arryIOputDataG.end(); itero++)
-	//	{
+	//if(m_pdoc->arryIOputDataG.size()){
+	//	for (vector<IOValue*>::iterator itero = m_pdoc->arryIOputDataG.begin(); itero != m_pdoc->arryIOputDataG.end(); itero++){
 	//		tmp.Name = (*itero)->Name;
 	//		tmp.Value = (*itero)->Value;
 
@@ -1053,33 +1052,42 @@ void CHSTPN_SYSSim::PassByValue(CHSTPN_SYSDoc * m_pdoc) {
 	//		string str(W2A(cstr));
 
 	//		mapMoveDataTmp[str] = tmp.Value;
-	//		//arryMoveDataTmp.push_back(tmp);
 	//	}
-	mapMoveDataTmp["plane_hzj_bjx"] = 12;
-	mapMoveDataTmp["plane_hzj_dlbl"] = 12;
-	mapMoveDataTmp["plane_hzj_yc"] = 0;
-	mapMoveDataTmp["plane_dzj_bjx"] = 6;
-	mapMoveDataTmp["plane_dzj_dlbl"] = 6;
-	mapMoveDataTmp["plane_dzj_yc"] = 6;
-	mapMoveDataTmp["plane_gjj_bjx"] = 8;
-	mapMoveDataTmp["plane_gjj_dlbl"] = 8;
-	mapMoveDataTmp["plane_gjj_yc"] = 0;
-	//雷达生命值
-	mapMoveDataTmp["health_radar_bjx"] = 100;
-	mapMoveDataTmp["health_radar_dlbl"] = 100;
-	mapMoveDataTmp["health_radar_yc"] = 100;
-	//战机数量
-	mapMoveDataTmp["plane_hzj"] = 32;
-	mapMoveDataTmp["plane_gjj"] = 18;
-	mapMoveDataTmp["plane_dzj"] = 18;
-	//导弹数量
-	mapMoveDataTmp["missile_bjx"] = 100;
-	mapMoveDataTmp["missile_dlbl"] = 100;
-	mapMoveDataTmp["missile_yc"] = 100;
-	//基地生命值
-	mapMoveDataTmp["health_bjx"] = 100;
-	mapMoveDataTmp["health_dlbl"] = 100;
-	mapMoveData.push_back(mapMoveDataTmp);
+	//}
+	//mapMoveData.push_back(mapMoveDataTmp);
+	
+	//模拟数据
+	//如果基地生命值为0
+	if (mapMoveDataTmp["health_bjx"] == 0 && mapMoveDataTmp["health_dlbl"] == 0) {
+		return;
+	}
+	//第一波战斗
+	//mapMoveDataTmp["plane_hzj_bjx"] = 12;
+	//mapMoveDataTmp["plane_hzj_dlbl"] = 12;
+	//mapMoveDataTmp["plane_hzj_yc"] = 0;
+	//mapMoveDataTmp["plane_dzj_bjx"] = 6;
+	//mapMoveDataTmp["plane_dzj_dlbl"] = 6;
+	//mapMoveDataTmp["plane_dzj_yc"] = 6;
+	//mapMoveDataTmp["plane_gjj_bjx"] = 8;
+	//mapMoveDataTmp["plane_gjj_dlbl"] = 8;
+	//mapMoveDataTmp["plane_gjj_yc"] = 0;
+	////雷达生命值
+	//mapMoveDataTmp["health_radar_bjx"] = 100;
+	//mapMoveDataTmp["health_radar_dlbl"] = 100;
+	//mapMoveDataTmp["health_radar_yc"] = 100;
+	////战机数量
+	//mapMoveDataTmp["plane_hzj"] = 36;
+	//mapMoveDataTmp["plane_gjj"] = 20;
+	//mapMoveDataTmp["plane_dzj"] = 12;
+	////导弹数量
+	//mapMoveDataTmp["missile_bjx"] = 100;
+	//mapMoveDataTmp["missile_dlbl"] = 100;
+	//mapMoveDataTmp["missile_yc"] = 100;
+	////基地生命值
+	//mapMoveDataTmp["health_bjx"] = 100;
+	//mapMoveDataTmp["health_dlbl"] = 100;
+	//mapMoveData.push_back(mapMoveDataTmp);
+	//第二波战斗
 
 	mapMoveDataTmp["plane_hzj_bjx"] = 12;
 	mapMoveDataTmp["plane_hzj_dlbl"] = 12;
@@ -1091,24 +1099,24 @@ void CHSTPN_SYSSim::PassByValue(CHSTPN_SYSDoc * m_pdoc) {
 	mapMoveDataTmp["plane_gjj_dlbl"] = 8;
 	mapMoveDataTmp["plane_gjj_yc"] = 0;
 	//雷达生命值
-	mapMoveDataTmp["health_radar_bjx"] = 75;
-	mapMoveDataTmp["health_radar_dlbl"] = 75;
-	mapMoveDataTmp["health_radar_yc"] = 100;
+	mapMoveDataTmp["health_radar_bjx"] = mapMoveData[0]["health_radar_bjx"] - 25;
+	mapMoveDataTmp["health_radar_dlbl"] = mapMoveData[0]["health_radar_dlbl"]-25;
+	mapMoveDataTmp["health_radar_yc"] = mapMoveData[0]["health_radar_yc"];
 	//战机数量
-	mapMoveDataTmp["plane_hzj"] = 26;
-	mapMoveDataTmp["plane_gjj"] = 12;
-	mapMoveDataTmp["plane_dzj"] = 12;
+	mapMoveDataTmp["plane_hzj"] = mapMoveData[0]["plane_hzj"]-6;
+	mapMoveDataTmp["plane_gjj"] = mapMoveData[0]["plane_gjj"]-6;
+	mapMoveDataTmp["plane_dzj"] = mapMoveData[0]["plane_dzj"]-6;
 	//导弹数量
-	mapMoveDataTmp["missile_bjx"] = 70;
-	mapMoveDataTmp["missile_dlbl"] = 70;
-	mapMoveDataTmp["missile_yc"] = 70;
+	mapMoveDataTmp["missile_bjx"] = mapMoveData[0]["missile_bjx"] - 30;
+	mapMoveDataTmp["missile_dlbl"] = mapMoveData[0]["missile_dlbl"] - 30;
+	mapMoveDataTmp["missile_yc"] = mapMoveData[0]["missile_yc"] - 30;
 	//基地生命值
-	mapMoveDataTmp["health_bjx"] = 55;
-	mapMoveDataTmp["health_dlbl"] = 55;
+	mapMoveDataTmp["health_bjx"] = mapMoveData[0]["health_bjx"] - 45;
+	mapMoveDataTmp["health_dlbl"] = mapMoveData[0]["health_dlbl"] - 45;
 	mapMoveData.push_back(mapMoveDataTmp);
-
+	//第三波战斗
 	mapMoveDataTmp["plane_hzj_bjx"] = 12;
-	mapMoveDataTmp["plane_hzj_dlbl"] = 0;
+	mapMoveDataTmp["plane_hzj_dlbl"] = 12;
 	mapMoveDataTmp["plane_hzj_yc"] = 0;
 	mapMoveDataTmp["plane_dzj_bjx"] = 0;
 	mapMoveDataTmp["plane_dzj_dlbl"] = 0;
@@ -1117,20 +1125,20 @@ void CHSTPN_SYSSim::PassByValue(CHSTPN_SYSDoc * m_pdoc) {
 	mapMoveDataTmp["plane_gjj_dlbl"] = 8;
 	mapMoveDataTmp["plane_gjj_yc"] = 0;
 	//雷达生命值
-	mapMoveDataTmp["health_radar_bjx"] = 50;
-	mapMoveDataTmp["health_radar_dlbl"] = 50;
-	mapMoveDataTmp["health_radar_yc"] = 100;
+	mapMoveDataTmp["health_radar_bjx"] = mapMoveData[1]["health_radar_bjx"] - 25;
+	mapMoveDataTmp["health_radar_dlbl"] = mapMoveData[1]["health_radar_dlbl"] - 25;
+	mapMoveDataTmp["health_radar_yc"] = mapMoveData[1]["health_radar_yc"];
 	//战机数量
-	mapMoveDataTmp["plane_hzj"] = 20;
-	mapMoveDataTmp["plane_gjj"] = 6;
-	mapMoveDataTmp["plane_dzj"] = 6;
+	mapMoveDataTmp["plane_hzj"] = mapMoveData[1]["plane_hzj"] - 6;
+	mapMoveDataTmp["plane_gjj"] = mapMoveData[1]["plane_gjj"] - 6;
+	mapMoveDataTmp["plane_dzj"] = mapMoveData[0]["plane_hzj"] ;
 	//导弹数量
-	mapMoveDataTmp["missile_bjx"] = 40;
-	mapMoveDataTmp["missile_dlbl"] = 40;
-	mapMoveDataTmp["missile_yc"] = 40;
+	mapMoveDataTmp["missile_bjx"] = mapMoveData[1]["missile_bjx"] - 30;
+	mapMoveDataTmp["missile_dlbl"] = mapMoveData[1]["missile_dlbl"] - 30;
+	mapMoveDataTmp["missile_yc"] = mapMoveData[1]["missile_yc"] - 30;
 	//基地生命值
-	mapMoveDataTmp["health_bjx"] = 10;
-	mapMoveDataTmp["health_dlbl"] = 10;
+	mapMoveDataTmp["health_bjx"] = mapMoveData[1]["health_bjx"] - 45;
+	mapMoveDataTmp["health_dlbl"] = mapMoveData[1]["health_dlbl"] - 45;
 	mapMoveData.push_back(mapMoveDataTmp);
 }
 

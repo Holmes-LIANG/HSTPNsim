@@ -95,7 +95,8 @@ public:
 	CDlgModelParmList *  m_pParmListDlg;// 模型属性编辑对话框
 
 	afx_msg void OnSimMove();
-	//CWinThread * m_moveThread;//动画线程
+	CWinThread * m_moveThread;//动画线程
+	afx_msg void OnCombat();
 };
 
 

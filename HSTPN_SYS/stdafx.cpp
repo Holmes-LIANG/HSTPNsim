@@ -5,4 +5,4 @@
 
 #include "stdafx.h"
 
-MYSQL mysql;
+//MYSQL mysql;

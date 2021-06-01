@@ -43,7 +43,7 @@
 //MySQLÊý¾Ý¿â
 #include <stdio.h>
 #include <windows.h>
-#include <mysql.h>
+//#include <mysql.h>
 
 
 

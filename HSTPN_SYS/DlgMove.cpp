@@ -31,7 +31,6 @@ CDlgMove::CDlgMove(CWnd* pParent /*=nullptr*/)
 	gameover = false;
 	frame = 0;
 	starttime = 0;
-
 }
 
 CDlgMove::~CDlgMove()
@@ -43,6 +42,7 @@ void CDlgMove::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 }
 
+//初始化Direct3D
 bool CDlgMove::Direct3D_Init(HWND window, int width, int height, bool fullscreen)
 {
 	//initialize Direct3D
@@ -69,7 +69,6 @@ bool CDlgMove::Direct3D_Init(HWND window, int width, int height, bool fullscreen
 		D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &d3ddev);
 	if (!d3ddev) return false;
 
-
 	//get a pointer to the back buffer surface
 	d3ddev->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &backbuffer);
 
@@ -78,7 +77,8 @@ bool CDlgMove::Direct3D_Init(HWND window, int width, int height, bool fullscreen
 
 	return 1;
 }
-
+ 
+//释放 Direct3D资源
 void CDlgMove::Direct3D_Shutdown()
 {
 	if (spriteobj) spriteobj->Release();
@@ -87,6 +87,7 @@ void CDlgMove::Direct3D_Shutdown()
 	if (d3d) d3d->Release();
 }
 
+//在屏幕绘制Surface（表面效果）
 void CDlgMove::DrawSurface(LPDIRECT3DSURFACE9 dest, float x, float y, LPDIRECT3DSURFACE9 source)
 {
 	//get width/height from source surface
@@ -101,6 +102,7 @@ void CDlgMove::DrawSurface(LPDIRECT3DSURFACE9 dest, float x, float y, LPDIRECT3D
 	d3ddev->StretchRect(source, &source_rect, dest, &dest_rect, D3DTEXF_NONE);
 }
 
+//加载surface
 LPDIRECT3DSURFACE9 CDlgMove::LoadSurface(LPCWSTR filename)
 {
 	LPDIRECT3DSURFACE9 image = NULL;
@@ -133,14 +135,13 @@ LPDIRECT3DSURFACE9 CDlgMove::LoadSurface(LPCWSTR filename)
 		D3DCOLOR_XRGB(0, 0, 0),   //for transparency (0 for none)
 		NULL);                  //source image info (usually NULL)
 
-
-								//make sure file was loaded okay
+	//make sure file was loaded okay
 	if (result != D3D_OK) return NULL;
 
 	return image;
 }
 
-
+//获得位图的尺寸
 D3DXVECTOR2 CDlgMove::GetBitmapSize(LPCWSTR filename)
 {
 	D3DXIMAGE_INFO info;
@@ -156,8 +157,7 @@ D3DXVECTOR2 CDlgMove::GetBitmapSize(LPCWSTR filename)
 	return size;
 }
 
-
-
+//加载Texture（纹理效果）
 LPDIRECT3DTEXTURE9 CDlgMove::LoadTexture(LPCWSTR filename, D3DCOLOR transcolor)
 {
 	LPDIRECT3DTEXTURE9 texture = NULL;
@@ -170,7 +170,7 @@ LPDIRECT3DTEXTURE9 CDlgMove::LoadTexture(LPCWSTR filename, D3DCOLOR transcolor)
 	//create the new texture by loading a bitmap image file
 	D3DXCreateTextureFromFileEx(
 		d3ddev,                //Direct3D device object
-		filename,      //bitmap filename
+		filename,              //bitmap filename
 		info.Width,            //bitmap image width
 		info.Height,           //bitmap image height
 		1,                     //mip-map levels (1 for no chain)
@@ -190,7 +190,14 @@ LPDIRECT3DTEXTURE9 CDlgMove::LoadTexture(LPCWSTR filename, D3DCOLOR transcolor)
 	return texture;
 }
 
-
+/*************************************************
+Description: 绘制sprite表中任何一帧图像
+Input: 
+	texture:纹理
+	destx、desty:x和y位置
+	framew、frameh、framenum：帧尺寸
+	columns：列数量
+*************************************************/
 void CDlgMove::Sprite_Draw_Frame(LPDIRECT3DTEXTURE9 texture, int destx, int desty, int framew, int frameh, int framenum, int columns)
 {
 	D3DXVECTOR3 position((float)destx, (float)desty, 0);
@@ -205,6 +212,14 @@ void CDlgMove::Sprite_Draw_Frame(LPDIRECT3DTEXTURE9 texture, int destx, int dest
 	spriteobj->Draw(texture, &rect, NULL, &position, white);
 }
 
+/*************************************************
+Description: 变换并绘制sprite
+Input:
+	x，y:平移向量
+	rotation:旋转角度
+	scaling：缩放比例
+	color：颜色
+*************************************************/
 void CDlgMove::Sprite_Transform_Draw(LPDIRECT3DTEXTURE9 image, int x, int y, int width, int height,
 	int frame, int columns, float rotation, float scaling, D3DCOLOR color)
 {
@@ -239,8 +254,17 @@ void CDlgMove::Sprite_Transform_Draw(LPDIRECT3DTEXTURE9 image, int x, int y, int
 	spriteobj->SetTransform(&mat);
 }
 
+/*************************************************
+Description: 使用定时器,设计以任何帧速率来显示动画的函数。每次调用这个函数时,帧号和定时器都会得到更新。将Sprite Animate和Sprite Draw
+Input:
+	frame:帧变量
+	startframe、endframe:起始帧和终止帧
+	direction：方向
+	starttime：起始时间变量
+*************************************************/
 void CDlgMove::Sprite_Animate(int &frame, int startframe, int endframe, int direction, int &starttime, int delay)
 {
+	//GetTickCount()函数(由Windows API提供)返回的毫秒值可用于计时
 	if ((int)GetTickCount() > starttime + delay)
 	{
 		starttime = GetTickCount();
@@ -305,13 +329,9 @@ bool CDlgMove::Game_Init(HWND window)
 	DirectInput_Init(window);
 	//create some fonts
 	font18 = MakeFont(_T("Arial Bold"), 18);
-	font24 = MakeFont(_T("Arial Bold"), 24);
-
+	font24 = MakeFont(_T("SimHei"), 24);
 
 	//初始化作战资源
-	//if (!Create_Dplanes()) return false;
-	//if (!Create_Hplanes()) return false;
-	//if (!Create_Gplanes())   return false;
 	if (!Create_missles()) return false;
 	if (!Create_Gbomb())   return false;
 	if (!Create_Hbomb())   return false;
@@ -329,7 +349,7 @@ bool CDlgMove::Game_Init(HWND window)
 	if (!gamesend1) return false;
 	gamesend2 = LoadSurface(_T("end2.png"));
 	if (!gamesend2) return false;
-	//ValuesInit();//初始化作战资源
+	ValuesInit();//初始化作战资源
 
 	return true;
 }
@@ -349,10 +369,10 @@ void CDlgMove::Game_Run(HWND window)
 
 	//按下鼠标和空格键仿真动画开始
 	if (gamestate == START)
-		if (Mouse_Button(0) || Key_Down(DIK_SPACE))
+		if (/*Mouse_Button(0) || */Key_Down(DIK_SPACE))
 			gamestate = RUN;
 	
-	ValuesInit();
+	//ValuesInit();
 
 	switch (gamestate)
 	{
@@ -423,16 +443,15 @@ void CDlgMove::Game_Run(HWND window)
 			Draw_Dplanes();
 		break;
 	case GAMESTATE::END:
-		if (healthDlbl == 0 && healthBjx == 0)
+		if (healthDlbl <= 0 && healthBjx <= 0)
 			DrawSurface(backbuffer, 0, 0, gamesend1);//美军胜利
 		else
 			DrawSurface(backbuffer, 0, 0, gamesend2);//利军胜利
 		break;
 	}
 
-
 	//stop drawing
-	spriteobj->End();
+ 	spriteobj->End();
 
 	//stop rendering
 	d3ddev->EndScene();
@@ -444,6 +463,7 @@ void CDlgMove::Game_Run(HWND window)
 
 }
 
+//动画结束
 void CDlgMove::Game_End()
 {
 	//free memory and shut down
@@ -461,7 +481,7 @@ BEGIN_MESSAGE_MAP(CDlgMove, CDialogEx)
 
 END_MESSAGE_MAP()
 
-
+//关闭对话框
 void CDlgMove::OnClose()
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
@@ -479,11 +499,11 @@ float toRadians(double degrees)
 {
 	return degrees * PI_over_180;
 }
-
+//创建文字
 LPD3DXFONT CDlgMove::MakeFont(WCHAR* name, int size)
 {
 	LPD3DXFONT font = NULL;
-
+	//字体描述符
 	D3DXFONT_DESC desc = {
 		size,                   //height
 		0,                      //width
@@ -514,9 +534,9 @@ void CDlgMove::FontPrint(LPD3DXFONT font, int x, int y, LPCWSTR text, D3DCOLOR c
 	font->DrawText(spriteobj, text, _tcslen(text), &rect, DT_LEFT, color);
 }
 
+//战场态势显示
 void CDlgMove::Draw_HUD()
 {
-
 	wchar_t cDhealth[10];
 	wchar_t cBhealth[10];
 	wchar_t cDmissles[10];
@@ -531,6 +551,10 @@ void CDlgMove::Draw_HUD()
 	wchar_t cGplanes[10];
 	wchar_t cHplanes[10];
 
+	if (healthDlbl < 0) healthDlbl = 0;
+	if (healthBjx < 0) healthBjx = 0;
+	
+	//进行格式转换，以便绘制文字
 	_itow_s(healthDlbl, cDhealth, 10, 10);
 	_itow_s(healthBjx, cBhealth, 10, 10);
 	_itow_s(missileDlbl, cDmissles, 10, 10);
@@ -545,7 +569,8 @@ void CDlgMove::Draw_HUD()
 	_itow_s(planeGjj, cGplanes, 10, 10);
 	_itow_s(planeHzj, cHplanes, 10, 10);
 	int y = SCREENH - 12;
-	D3DCOLOR color = D3DCOLOR_ARGB(200, 255, 255, 255);
+	D3DCOLOR color = D3DCOLOR_ARGB(255, 255, 0, 0);
+
 	//demonstrate font output
 	FontPrint(font24, 800, 0, _T("利比亚"), color);
 	FontPrint(font18, 800, 24, _T("的黎波里生命值："), color);
@@ -575,12 +600,14 @@ void CDlgMove::Draw_HUD()
 	FontPrint(font18, 760, 60, cHplanes, color);
 }
 
+//加载电子战飞机资源
 bool CDlgMove::Create_Dplanes()
 {
 	imgDPlane = LoadTexture(_T("Dplane.png"));
 	imgDPlane2 = LoadTexture(_T("Dplane2.png"));
 	if (!imgDPlane) return false;
 	int dis = 20;
+	//设置电子战飞机初始位置，旋转缩放平移等
 	if (planeDzhDlbl == 6) {
 		for (int i = 0; i < 6; i++)
 		{
@@ -656,29 +683,24 @@ bool CDlgMove::Create_Dplanes()
 	return true;
 }
 
+//绘制电子战飞机
 void CDlgMove::Draw_Dplanes()
 {
 	//获取变量在动画中显示
 	for (int i = 0; i < 12; i++)
 	{
 		if (Dplane[i].alive) {
+			//电子战飞机进行变换
 			if (i < 12 && i >= 6) {
-				//if (Dplane[6].x < 800) {
-				//	Dplane[i].x += Dplane[i].velx;
-				//	Dplane[i].y += Dplane[i].vely;
-				//}
 				Sprite_Transform_Draw(imgDPlane2, Dplane[i].x, Dplane[i].y, Dplane[i].width, Dplane[i].height, 0, 1, Dplane[i].rotation, Dplane[i].scaling);
 			}
 			else {
-				//if (Dplane[0].x > 300) {
-				//	Dplane[i].x += Dplane[i].velx;
-				//	Dplane[i].y += Dplane[i].vely;
-				//}
 				Sprite_Transform_Draw(imgDPlane, Dplane[i].x, Dplane[i].y, Dplane[i].width, Dplane[i].height, 0, 1, Dplane[i].rotation, Dplane[i].scaling);
 			}
 		}
 
 		if (!Dplane[i].alive&&Dplane[i].explosion) {
+			//绘制爆炸动画
 			Sprite_Animate(frame, 0, 29, 1, starttime, 90);
 			Sprite_Transform_Draw(imgExplosion, Dplane[i].x, Dplane[i].y, explosion.width, explosion.height, frame, explosion.columns, explosion.rotation, explosion.scaling);
 			if (frame == 29)
@@ -911,8 +933,6 @@ bool CDlgMove::Create_missles()
 	gpcountDlbl = 0;
 	gpcountBjx = 0;
 	gpcountYc = 0;
-	//dpcountDlbl = 0;
-	//dpcountBjx = 0;
 
 	for (int i = 0; i < 60; i++) {
 		missle[i].width = 100;
@@ -1202,8 +1222,6 @@ bool CDlgMove::Create_ships()
 	}
 	ship[0].x = 700;
 	ship[0].y = 0;
-	//ship[1].x = 200;
-	//ship[1].y = 200;
 }
 
 void CDlgMove::Draw_ships() {
@@ -1278,12 +1296,6 @@ void CDlgMove::Draw_launcher() {
 		if (launcher[i].alive) {
 			for (int j = 0; j < BOMB; j++)
 				//导弹与发射架接触使其爆炸
-				//if (Collision(launcher[i], Hbomb[j])&& Hbomb[j].alive) {
-				//	launcher[i].attack = true;
-				//	Hbomb[j].alive    = false;
-				//	//if(j<12) healthBjx-=5;
-				//	//if (j >= 12 && j < 24) healthDlbl -= 5;
-				//}
 				Sprite_Transform_Draw(imgLauncher, launcher[i].x, launcher[i].y, launcher[i].width, launcher[i].height, 0, 1, launcher[i].rotation, launcher[i].scaling);
 		}
 		if (launcher[i].attack&&launcher[i].explosion) {
@@ -1522,8 +1534,6 @@ void CDlgMove::Draw_Gplanes() {
 	//战机发射导弹
 	for (int i = 0; i < 24; i++) {
 		if (Gplane[i].alive) {
-			//Gplane[i].x += Gplane[i].velx;
-			//Gplane[i].y += Gplane[i].vely;
 			if (i<16 && i >= 8)
 				Sprite_Transform_Draw(imgGPlane2, Gplane[i].x, Gplane[i].y, Gplane[i].width, Gplane[i].height, 0, 1, Gplane[i].rotation, Gplane[i].scaling);
 			else
@@ -1572,59 +1582,62 @@ void CDlgMove::ValuesInit() {
 }
 void CDlgMove::ValuesUpdate() {
 	//传递所需变量
-	moveData = CHSTPN_SYSSim::getMoveData();
-	if ((Hplane[11].y >= 800 || Hplane[23].y >= 800) && moveData.size() > timesAttack) {
-		//将战机全部失活，并复位位置
-		for (int i = 0; i < 36; i++) {
+	//moveData = CHSTPN_SYSSim::getMoveData();
+	if (moveData.size() == timesAttack-1)
+		gamestate = END;
+	if ((Hplane[11].y >= 800 || Hplane[23].y >= 800) ) {
+		if(moveData.size() > timesAttack){
+			//将战机全部失活，并复位位置
+			for (int i = 0; i < 36; i++) {
 
-			Hplane[i].alive = false;
-			Hplane[i].x = -1000;
-			Hplane[i].y = -1000;
-			Hbomb[i].alive = false;
-			Hbomb[i].x = -1000;
-			Hbomb[i].y = -1000;
-		}
-		for (int i = 0; i < 24; i++) {
-			Gplane[i].alive = false;
-			Gplane[i].x = -1000;
-			Gplane[i].y = -1000;
-			Gbomb[i].alive = false;
-			Gbomb[i].x = -1000;
-			Gbomb[i].y = -1000;
-		}
+				Hplane[i].alive = false;
+				Hplane[i].x = -1000;
+				Hplane[i].y = -1000;
+				Hbomb[i].alive = false;
+				Hbomb[i].x = -1000;
+				Hbomb[i].y = -1000;
+			}
+			for (int i = 0; i < 24; i++) {
+				Gplane[i].alive = false;
+				Gplane[i].x = -1000;
+				Gplane[i].y = -1000;
+				Gbomb[i].alive = false;
+				Gbomb[i].x = -1000;
+				Gbomb[i].y = -1000;
+			}
 
-		//对应变量赋值
-		planeHzjBjx = moveData[timesAttack]["plane_hzj_bjx"];
-		planeHzjDlbl = moveData[timesAttack]["plane_hzj_dlbl"];
-		planeHzjYc = moveData[timesAttack]["plane_hzj_yc"];
+			//对应变量赋值
+			planeHzjBjx = moveData[timesAttack]["plane_hzj_bjx"];
+			planeHzjDlbl = moveData[timesAttack]["plane_hzj_dlbl"];
+			planeHzjYc = moveData[timesAttack]["plane_hzj_yc"];
 
-		planeDzhBjx = moveData[timesAttack]["plane_dzj_bjx"];
-		planeDzhDlbl = moveData[timesAttack]["plane_dzj_dlbl"];
-		planeDzhYc = moveData[timesAttack]["plane_dzj_yc"];
+			planeDzhBjx = moveData[timesAttack]["plane_dzj_bjx"];
+			planeDzhDlbl = moveData[timesAttack]["plane_dzj_dlbl"];
+			planeDzhYc = moveData[timesAttack]["plane_dzj_yc"];
 
-		planeGjjBjx = moveData[timesAttack]["plane_gjj_bjx"];
-		planeGjjDlbl = moveData[timesAttack]["plane_gjj_dlbl"];
-		planeGjjYc = moveData[timesAttack]["plane_gjj_yc"];
+			planeGjjBjx = moveData[timesAttack]["plane_gjj_bjx"];
+			planeGjjDlbl = moveData[timesAttack]["plane_gjj_dlbl"];
+			planeGjjYc = moveData[timesAttack]["plane_gjj_yc"];
 
-		missileBjx = moveData[timesAttack]["missile_bjx"];
-		missileDlbl = moveData[timesAttack]["missile_dlbl"];
-		missileYc = moveData[timesAttack]["missile_yc"];
-		//雷达生命值
-		healthRadarBjx = moveData[timesAttack]["health_radar_bjx"];
-		healthRadarDlbl = moveData[timesAttack]["health_radar_dlbl"];
-		healthRadarYc = moveData[timesAttack]["health_radar_yc"];
-		//战机数量
-		planeHzj = moveData[timesAttack]["plane_hzj"];
-		planeGjj = moveData[timesAttack]["plane_gjj"];
-		planeDzj = moveData[timesAttack]["plane_dzj"];
-		//基地生命值
-		healthBjx = moveData[timesAttack]["health_bjx"];
-		healthDlbl = moveData[timesAttack]["health_dlbl"];
+			missileBjx = moveData[timesAttack]["missile_bjx"];
+			missileDlbl = moveData[timesAttack]["missile_dlbl"];
+			missileYc = moveData[timesAttack]["missile_yc"];
+			//雷达生命值
+			healthRadarBjx = moveData[timesAttack]["health_radar_bjx"];
+			healthRadarDlbl = moveData[timesAttack]["health_radar_dlbl"];
+			healthRadarYc = moveData[timesAttack]["health_radar_yc"];
+			//战机数量
+			planeHzj = moveData[timesAttack]["plane_hzj"];
+			planeGjj = moveData[timesAttack]["plane_gjj"];
+			planeDzj = moveData[timesAttack]["plane_dzj"];
+			//基地生命值
+			healthBjx = moveData[timesAttack]["health_bjx"];
+			healthDlbl = moveData[timesAttack]["health_dlbl"];
 
-		missileBjx == moveData[timesAttack]["missile_bjx"];
-		missileDlbl == moveData[timesAttack]["missile_dlbl"];
-		missileYc == moveData[timesAttack]["missile_yc"];
-		if (moveData.size() - 1 > timesAttack) {
+			missileBjx == moveData[timesAttack]["missile_bjx"];
+			missileDlbl == moveData[timesAttack]["missile_dlbl"];
+			missileYc == moveData[timesAttack]["missile_yc"];
+
 			//启动延时
 			refreshcount = 0;
 
@@ -1634,15 +1647,15 @@ void CDlgMove::ValuesUpdate() {
 			Create_Gplanes();
 			Create_Gbomb();
 			//Create_Dplanes();
-			Create_missles();
+			Create_missles();	
+			//仿真结束，设置状态位
 		}
 		timesAttack++;
 	}
-	//仿真结束，设置状态位
-	if (moveData.size() == timesAttack)
-		gamestate = END;
+
 }
 
+//键盘等输入设备初始化
 bool CDlgMove::DirectInput_Init(HWND hwnd)
 {
 	//initialize DirectInput object
@@ -1669,6 +1682,7 @@ bool CDlgMove::DirectInput_Init(HWND hwnd)
 	return true;
 }
 
+//输入设备更新
 void CDlgMove::DirectInput_Update()
 {
 	//update mouse
@@ -1701,12 +1715,12 @@ void CDlgMove::DirectInput_Update()
 	}
 }
 
-
+//获取键盘X坐标
 int CDlgMove::Mouse_X()
 {
 	return mouse_state.lX;
 }
-
+//获取键盘y坐标
 int CDlgMove::Mouse_Y()
 {
 	return mouse_state.lY;
@@ -1716,13 +1730,13 @@ int CDlgMove::Mouse_Button(int button)
 {
 	return mouse_state.rgbButtons[button] & 0x80;
 }
-
+//检测键盘按下
 bool CDlgMove::Key_Down(int key)
 {
 	return (bool)(keys[key] & 0x80);
 }
 
-
+//关闭输入设备
 void CDlgMove::DirectInput_Shutdown()
 {
 	if (dikeyboard)
