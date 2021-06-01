@@ -73,22 +73,20 @@ HSTPNSim传至Python端的值通过Socket通信的conn.recv()函数接收，通�
 
 附：Python端Socket接口程序
 #导入相应的库文件
+
+```python
 import socket
 from SAE import load_model
 
-**定义通信套接字**
-
+#定义通信套接字
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind(('127.0.0.1', 4999))
 
-**同时最大连接客户端数**
-
+#同时最大连接客户端数
 sock.listen(10)
 
-**socket服务器监听**
-
-**监听循环**
-
+#socket服务器监听
+#监听循环**
 while True:
     print('ready to connect')
     conn, addr = sock.accept()  # 开始连接
@@ -96,8 +94,8 @@ while True:
     while True:
         try:
             buff = ''#清空接收堆栈
-            # test_x = np.array((1, 39), dtype= float)
-            # while len(buff) < 400:
+             test_x = np.array((1, 39), dtype= float)
+            while len(buff) < 400:
             data = conn.recv(10)
             buff = data.decode()  # 接受信息
             print('recv:' + buff)
@@ -110,4 +108,5 @@ while True:
             print(e)
             break
     conn.close()  # 关闭连接
+```
 
